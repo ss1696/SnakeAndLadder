@@ -7,7 +7,6 @@ public class SnakeAndLadder {
 	int noOfPlayer = 1;
 
 	public static void main(String[] args) {
-	
 		SnakeAndLadder sl = new SnakeAndLadder();
 		sl.rollDice();	
 	}
