@@ -2,15 +2,12 @@ import java.util.Random;
 
 public class SnakeAndLadder {
 	
-	//Initializing
-	//CONSTANT 
+	//Initializing Constant and VAriable 
 	int START_POSITION = 0;
-	int NO_OF_PLAYER = 1;
-	//Variable
+	int noOFPLayers = 1;
 	int position = START_POSITION;
 
 	public static void main(String[] args) {
-		
 		SnakeAndLadder sl = new SnakeAndLadder();
 		sl.checkOption();
 	}
@@ -36,8 +33,8 @@ public class SnakeAndLadder {
 		
 		switch(options) {
 		case 0:
-			System.out.println("There is NOPLAY for the player..");
-			break ;		
+				System.out.println("There is NOPLAY for the player..");
+				break ;		
 		case 1:
 				position = position + diceRolled;
 				break ;
