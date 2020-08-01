@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class SnakeAndLadder {
 	
-	//Initializing Constant and VAriable 
+	//Initializing Constant and Variable 
 	int START_POSITION = 0;
 	int noOFPLayers = 1;
 	int position = START_POSITION;
@@ -36,13 +36,17 @@ public class SnakeAndLadder {
 	private int checkOption(int options, int  diceRolled) {
 		switch(options) {
 		case 1:
-			position = position + diceRolled;
-			return position;
+			if((position + diceRolled) <= MAX_POSITION) {
+				position = position + diceRolled;		// ladder position should be less than max position  
+				return position;
+			} else {
+				return position;
+			}
 		case 2:
 			position = position - diceRolled;
 			if(position < 0) {
 				position = 0;
-				return position;
+				return position;				// if snake position is less than 0 than position remains 0
 			} else {
 				return position;
 			}	
