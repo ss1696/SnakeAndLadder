@@ -1,31 +1,43 @@
 import java.util.Random;
-import java.util.HashMap;
 
 public class SnakeAndLadder {
 	
 	//Initializing Constant and Variable 
-	int START_POSITION = 0;
-	int noOFPLayers = 1;
-	int position = START_POSITION;
-	final int MAX_POSITION = 100;
-	int diceRollsCount;
-	
-	HashMap<Integer,Integer> positionResult = new HashMap<Integer,Integer>();
+	private final int START_POSITION = 0;
+	private final int MAX_POSITION = 100;
+	private int position;
+	private int[] players;
+	private int diceRollsCount;
+	private int player1;
+	private int player2;
 
 	public static void main(String[] args) {
 		SnakeAndLadder sl = new SnakeAndLadder();
-		sl.game();
-		sl.displayDiceRoll_Position();
+		sl.game(2);
+		sl.showWin();
+	}
+	
+	//Constructor
+	SnakeAndLadder() {
+		players = new int[2];
 	}
 	
 	//Here function game is used to run the game till the position reached maximum value   	
-	private void game() {
-		Random random = new Random();
-		while(position != MAX_POSITION) {
-			int diceRolled = this.rollDice();
-			int options = random.nextInt(3); // To get the option where 0-NoPlay 1-Ladder 2-Sanke
-			position = this.checkOption(options, diceRolled);
-			positionResult.put(diceRollsCount, position);
+	private void game(int noOfPlayers) {
+		int i = 0;
+		position = START_POSITION;
+		while(  players[i] < MAX_POSITION && players[i+1] < MAX_POSITION ) {
+			diceRollsCount++;
+			//For player1 Position
+			position = player1;
+			player1 = checkOption(player1);
+			players[i] = player1;
+			System.out.println("Player 1 after " + diceRollsCount + " dice roll is at position "+players[i]);
+			//For player2 Position
+			position = player2;
+			player2 = checkOption(player2);
+			players[i+1] = player2;
+			System.out.println("Player 2 after " + diceRollsCount + " dice roll is at position "+players[i+1]);
 		}
 	}
 	
@@ -38,11 +50,15 @@ public class SnakeAndLadder {
 	 }
 
 	//Here the function checkOption is used to return the position of player	
-	private int checkOption(int options, int  diceRolled) {
+	private int checkOption(int position) {
+		Random random = new Random();
+		int options = random.nextInt(3); 		                // To get the option where 0-NoPlay 1-Ladder 2-Sanke
+		int diceRolled = this.rollDice();
 		switch(options) {
 		case 1:
 			if((position + diceRolled) <= MAX_POSITION) {
 				position = position + diceRolled;		// ladder position should be less than max position  
+				position = checkOption(position);
 				return position;
 			} else {
 				return position;
@@ -60,12 +76,14 @@ public class SnakeAndLadder {
 		}
 	}
 
-	// Displaying the dice roll and the position of the player 
-	private void displayDiceRoll_Position() {
-		for (int rollDice = 1; rollDice <= diceRollsCount; rollDice++) {
-			System.out.println("Player after " + rollDice + " dice roll is at position "+positionResult.get(rollDice));
+	//Here this function is used to show which player wins ......
+	private void showWin() {
+		int i = 0;
+		if(players[i] > players[i+1]) {
+			System.out.println("Player 1 wins by "+(players[i] - players[i+1])+" points.");
+		} else {
+			System.out.println("Player 2 wins by "+(players[i+1] - players[i])+" points.");
 		}
-		
 	}
 }
 
