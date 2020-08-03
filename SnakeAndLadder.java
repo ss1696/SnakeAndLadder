@@ -39,8 +39,7 @@ public class SnakeAndLadder {
 				position = position + diceRolled;
 				break ;
 		case 2:
-				position = position - diceRolled;
-				if(position < 0) {
+				if((position - diceRolled) < 0) {
 					position = 0;
 					System.out.println(position);
 				} else {
