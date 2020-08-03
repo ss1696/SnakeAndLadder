@@ -64,11 +64,11 @@ public class SnakeAndLadder {
 				return position;
 			}
 		case 2:
-			position = position - diceRolled;
-			if(position < 0) {
+			if((position - diceRolled) < 0) {
 				position = 0;
 				return position;				// if snake position is less than 0 than position remains 0
 			} else {
+				position = position - diceRolled;
 				return position;
 			}	
 		default:
